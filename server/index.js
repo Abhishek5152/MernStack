@@ -28,7 +28,7 @@ const PORT = process.env.PORT;
 app.get("/",(req, res) =>{
     res.sendfile(path.join(__dirname,"Views","port.html"));
 });
-app.get('/abhi',(res,req) => {
+app.get('/abhi',(req,res) => {
     res.json({'content':'Hello'});
 })
 
