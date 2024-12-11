@@ -25,14 +25,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
 
-app.get("/",(req, res) =>{
-    res.sendfile(path.join(__dirname,"Views","port.html"));
+// app.get("/",(req, res) =>{
+//     res.sendFile(path.join(__dirname,"Views","port.html"));
+// });
+
+app.use((req,res,next)=>{
+    const secretCode = req.query.secret;
+    req.isAuthorised = secretCode === '1234';
+    next();
 });
-app.get('/abhi',(req,res) => {
-    res.json({'content':'Hello'});
-})
+app.get("/",(req,res)=>{
+    if(req.isAuthorised){
+        res.send("Noise!!!");
+        // res.sendFile(path.join(__dirname,"Views","port.html"));
+    }
+    else{
+        res.send("You are Dangerous!!");
+    }
+});
 
 app.use(express.static(path.join(__dirname,"Views")));
 app.listen(PORT,()=> {
-    console.log(`Server running on http://localhost:${PORT} `)
+    console.log(`Server running on http://localhost:${PORT}/?secret=1234`)
 });
