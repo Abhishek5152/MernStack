@@ -16,35 +16,51 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config();
 import path from 'path';
 import {fileURLToPath} from 'url';
+import mongoose from 'mongoose';
+dotenv.config();
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
+const URL = process.env.MONGODB_URL;
+
+// try{
+//     mongoose.connect(URL);
+//     console.log('its Connected!!😊😊😊😊😊😊');
+// }catch(error){
+//     console.error('error', error);
+// }/
+
+mongoose.connect(URL).then(()=>{
+    console.log('its Connected!!😊😊😊😊😊😊');
+    app.listen(PORT,() => {
+        console.log(`Listening at port http://localhost:${PORT}`);
+    });
+}).catch((error)=>{console.log("connection Failed :",error)})
 
 // app.get("/",(req, res) =>{
 //     res.sendFile(path.join(__dirname,"Views","port.html"));
 // });
 
-app.use((req,res,next)=>{
-    const secretCode = req.query.secret;
-    req.isAuthorised = secretCode === '1234';
-    next();
-});
-app.get("/",(req,res)=>{
-    if(req.isAuthorised){
-        res.send("Noise!!!");
-        // res.sendFile(path.join(__dirname,"Views","port.html"));
-    }
-    else{
-        res.send("You are Dangerous!!");
-    }
-});
+// app.use((req,res,next)=>{
+//     const secretCode = req.query.secret;
+//     req.isAuthorised = secretCode === '1234';
+//     next();
+// });
+// app.get("/",(req,res)=>{
+//     if(req.isAuthorised){
+//         res.send("Noise!!!");
+//         // res.sendFile(path.join(__dirname,"Views","port.html"));
+//     }
+//     else{
+//         res.send("You are Dangerous!!");
+//     }
+// });
 
-app.use(express.static(path.join(__dirname,"Views")));
-app.listen(PORT,()=> {
-    console.log(`Server running on http://localhost:${PORT}/?secret=1234`)
-});
+// app.use(express.static(path.join(__dirname,"Views")));
+// app.listen(PORT,()=> {
+//     console.log(`Server running on http://localhost:${PORT}/?secret=1234`)
+// });
