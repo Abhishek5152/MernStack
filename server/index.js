@@ -41,7 +41,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 // }/
 
 mongoose.connect(URL).then(()=>{
-    console.log('its Connected!!😊😊😊😊😊😊');
+    console.log('its Connected!!😊🤝😁');
     app.listen(PORT,() => {
         console.log(`Listening at port http://localhost:${PORT}/`);
     });
@@ -90,3 +90,9 @@ app.get("/",(req, res) =>{
 // app.listen(PORT,()=> {
 //     console.log(`Server running on http://localhost:${PORT}/?secret=1234`)
 // });
+
+process.on('SIGINT', async () => { 
+    console.log("Disconnected!!😒🫱..🫲-😓"); 
+    await mongoose.disconnect(); 
+    process.exit(0); 
+});
