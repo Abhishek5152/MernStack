@@ -18,7 +18,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import bodyparser from 'body-parser';
 import mongoose from 'mongoose';
+import userschema from "./models/userModel.js";
 dotenv.config();
 
 const app = express();
@@ -26,6 +28,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
 const URL = process.env.MONGODB_URL;
+
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
 
 // try{
 //     mongoose.connect(URL);
