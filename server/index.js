@@ -56,7 +56,7 @@ app.post("/uform", async (req, res) => {
     }); 
     newUser.save().then(() => { 
         console.log('User created'); 
-        res.status(201).send('User created'); 
+        res.redirect('/');
     }).catch((err) => { 
         console.log(err); 
         res.status(500).send('Error creating user'); 
