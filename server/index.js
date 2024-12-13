@@ -21,6 +21,7 @@ import {fileURLToPath} from 'url';
 import bodyparser from 'body-parser';
 import mongoose from 'mongoose';
 import userschema from "./models/userModel.js";
+
 dotenv.config();
 
 const app = express();
@@ -45,6 +46,26 @@ mongoose.connect(URL).then(()=>{
         console.log(`Listening at port http://localhost:${PORT}`);
     });
 }).catch((error)=>{console.log("connection Failed :",error)})
+
+app.post("/uform", async (req, res) => {
+    const newUser = new userschema({
+        name: req.body.uname, 
+        email: req.body.email, 
+        password: req.body.pass, 
+        age: req.body.age, 
+    }); 
+    newUser.save().then(() => { 
+        console.log('User created'); 
+        res.status(201).send('User created'); 
+    }).catch((err) => { 
+        console.log(err); 
+        res.status(500).send('Error creating user'); 
+    });
+});
+
+app.get("/",(req, res) =>{
+    res.sendFile(path.join(__dirname,"Views","form.html"));
+});
 
 // app.get("/",(req, res) =>{
 //     res.sendFile(path.join(__dirname,"Views","port.html"));
