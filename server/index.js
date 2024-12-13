@@ -20,7 +20,8 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import bodyparser from 'body-parser';
 import mongoose from 'mongoose';
-import userschema from "./models/userModel.js";
+import user from "./models/userModel.js";
+import { type } from 'os';
 
 dotenv.config();
 
@@ -47,25 +48,60 @@ mongoose.connect(URL).then(()=>{
     });
 }).catch((error)=>{console.log("connection Failed :",error)})
 
-app.post("/uform", async (req, res) => {
-    const newUser = new userschema({
-        name: req.body.uname, 
-        email: req.body.email, 
-        password: req.body.pass, 
-        age: req.body.age, 
-    }); 
-    newUser.save().then(() => { 
-        console.log('User created'); 
-        res.redirect('/');
-    }).catch((err) => { 
-        console.log(err); 
-        res.status(500).send('Error creating user'); 
+async function createuser(){
+    const user1 = new user({
+        name: "Ram",
+        email: "ram@gmail.com",
+        password : "123",
+        age: "18"
     });
-});
+    const result=await user1.save();
+    console.log("User Created:",result);
+}
+createuser();
 
-app.get("/",(req, res) =>{
-    res.sendFile(path.join(__dirname,"Views","form.html"));
-});
+async function readone(){
+    const result=await user.findOne({ email: "ram@gmail.com"});
+    console.log("User Found:",result);
+}
+readone();
+
+async function Updateone(){
+    const result=await user.findOneAndUpdate(
+        {email: "ram@gmail.com"},
+        {name: "Aman"},
+        {new:true}
+    );
+    console.log("User Updated:",result);
+}
+Updateone();
+
+async function deleteuser(){
+    const result =await user.deleteOne({name:"Ram"});
+    console.log("User Deleted:",result);
+}
+deleteuser();
+
+
+// app.post("/uform", async (req, res) => {
+//     const newUser = new userschema({
+//         name: req.body.uname, 
+//         email: req.body.email, 
+//         password: req.body.pass, 
+//         age: req.body.age, 
+//     }); 
+//     newUser.save().then(() => { 
+//         console.log('User created'); 
+//         res.redirect('/');
+//     }).catch((err) => { 
+//         console.log(err); 
+//         res.status(500).send('Error creating user'); 
+//     });
+// });
+
+// app.get("/",(req, res) =>{
+//     res.sendFile(path.join(__dirname,"Views","form.html"));
+// });
 
 // app.get("/",(req, res) =>{
 //     res.sendFile(path.join(__dirname,"Views","port.html"));
