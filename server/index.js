@@ -44,7 +44,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 mongoose.connect(URL).then(()=>{
     console.log('its Connected!!😊🤝😁');
     app.listen(PORT,() => {
-        console.log(`Listening at port http://localhost:${PORT}/api/create`);
+        console.log(`Listening at port http://localhost:${PORT}/api/lol`);
     });
 }).catch((error)=>{console.log("connection Failed :",error)})
 

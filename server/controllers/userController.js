@@ -11,5 +11,14 @@ export const createUser = async (req,res)=> {
     }catch(error){
         res.status(500).json({error:"yerror"})
     }
+}
 
+export const lolall = async (req,res)=>{
+    try{
+        const userData = await User.find();
+        if (!userData){
+            res.status(404).json({msg:"Lol user is not here!!"});
+        }
+        res.status(200).json(userData);
+    }catch(error){res.status(500).json({err:error});}
 }
