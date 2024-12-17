@@ -21,7 +21,7 @@ import {fileURLToPath} from 'url';
 import bodyparser from 'body-parser';
 import mongoose from 'mongoose';
 import user from "./models/userModel.js";
-import { type } from 'os';
+import route from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -44,43 +44,43 @@ app.use(bodyparser.urlencoded({ extended: true }));
 mongoose.connect(URL).then(()=>{
     console.log('its Connected!!😊🤝😁');
     app.listen(PORT,() => {
-        console.log(`Listening at port http://localhost:${PORT}/`);
+        console.log(`Listening at port http://localhost:${PORT}/api/create`);
     });
 }).catch((error)=>{console.log("connection Failed :",error)})
 
-async function createuser(){
-    const user1 = new user({
-        name: "Ram",
-        email: "ram@gmail.com",
-        password : "123",
-        age: "18"
-    });
-    const result=await user1.save();
-    console.log("User Created:",result);
-}
-createuser();
+// async function createuser(){
+//     const user1 = new user({
+//         name: "Ram",
+//         email: "ram@gmail.com",
+//         password : "123",
+//         age: "18"
+//     });
+//     const result=await user1.save();
+//     console.log("User Created:",result);
+// }
+// createuser();
 
-async function readone(){
-    const result=await user.findOne({ email: "ram@gmail.com"});
-    console.log("User Found:",result);
-}
-readone();
+// async function readone(){
+//     const result=await user.findOne({ email: "ram@gmail.com"});
+//     console.log("User Found:",result);
+// }
+// readone();
 
-async function Updateone(){
-    const result=await user.findOneAndUpdate(
-        {email: "ram@gmail.com"},
-        {name: "Aman"},
-        {new:true}
-    );
-    console.log("User Updated:",result);
-}
-Updateone();
+// async function Updateone(){
+//     const result=await user.findOneAndUpdate(
+//         {email: "ram@gmail.com"},
+//         {name: "Aman"},
+//         {new:true}
+//     );
+//     console.log("User Updated:",result);
+// }
+// Updateone();
 
-async function deleteuser(){
-    const result =await user.deleteOne({name:"Ram"});
-    console.log("User Deleted:",result);
-}
-deleteuser();
+// async function deleteuser(){
+//     const result =await user.deleteOne({name:"Ram"});
+//     console.log("User Deleted:",result);
+// }
+// deleteuser();
 
 
 // app.post("/uform", async (req, res) => {
@@ -126,6 +126,7 @@ deleteuser();
 // app.listen(PORT,()=> {
 //     console.log(`Server running on http://localhost:${PORT}/?secret=1234`)
 // });
+app.use('/api',route);
 
 process.on('SIGINT', async () => { 
     console.log("Disconnected!!😒🫱..🫲-😓"); 
