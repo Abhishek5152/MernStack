@@ -7,7 +7,7 @@ export const createUser = async (req,res)=> {
             res.status(404).json({msg:"User Does Not Exist!!"});   
         }
         await userData.save();
-        res.status(200).json({msg:"All Ij WElll!!!"});
+        res.status(200).json({msg:"All Ij WElll!!!👍✌️👌"});
     }catch(error){
         res.status(500).json({error:"yerror"})
     }

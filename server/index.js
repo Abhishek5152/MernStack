@@ -26,8 +26,8 @@ import route from "./routes/userRoutes.js";
 dotenv.config();
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT;
 const URL = process.env.MONGODB_URL;
 
