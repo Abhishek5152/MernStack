@@ -16,11 +16,11 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
-import path from 'path';
-import {fileURLToPath} from 'url';
+// import path from 'path';
+// import {fileURLToPath} from 'url';
 import bodyparser from 'body-parser';
 import mongoose from 'mongoose';
-import user from "./models/userModel.js";
+// import user from "./models/userModel.js";
 import route from "./routes/userRoutes.js";
 
 dotenv.config();
