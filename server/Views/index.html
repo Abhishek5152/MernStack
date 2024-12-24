@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .card-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .card-title {
+            margin-bottom: 0;
+        }
+        .card-header {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .btn-block {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title">Register</h5>
+            </div>
+            <div class="card-body">
+                <form action="/api/createUser" method="post" id="userForm" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="regname">Name</label>
+                        <input type="text" class="form-control" id="regname" name="name" required>
+                        <div class="invalid-feedback">
+                            Please enter your name.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="regemail">Email</label>
+                        <input type="email" class="form-control" id="regemail" name="email" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="regpass">Password</label>
+                        <input type="password" class="form-control" id="regpass" name="pass" required>
+                        <div class="invalid-feedback">
+                            Please enter your password.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="regage">Age</label>
+                        <input type="number" class="form-control" id="regage" name="age" required>
+                        <div class="invalid-feedback">
+                            Please enter your age.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-custom btn-block">Create User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title">Login</h5>
+            </div>
+            <div class="card-body">
+                <form action="/api/login" method="post" id="loginForm" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" name="email" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPass">Password</label>
+                        <input type="password" class="form-control" id="loginPass" name="pass" required>
+                        <div class="invalid-feedback">
+                            Please enter your password.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-custom btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS for form validation -->
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+</html>
