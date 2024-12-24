@@ -1,14 +1,12 @@
-import{createUser} from "../controllers/userController.js";
-import{lolall} from "../controllers/userController.js";
-import{updateme} from "../controllers/userController.js";
-import{deleteme} from "../controllers/userController.js";
+import express from 'express';
+import { createUser, lolall, updateme, deleteme, UserLog} from '../controllers/userController.js';
 
-import express from "express";
+const router = express.Router();
 
-const route = express.Router();
-route.post("/lolall",lolall);
-route.post("/createUser",createUser);
-route.post("/updateme",updateme);
-route.post("/deleteme",deleteme);
+router.post("/lolall", lolall);
+router.post("/createUser", createUser);
+router.post("/updateme", updateme);
+router.post("/deleteme", deleteme);
+router.post("/login", UserLog);
 
-export default route;
+export default router;
