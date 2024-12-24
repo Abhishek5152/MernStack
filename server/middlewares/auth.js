@@ -3,7 +3,7 @@ import User from '../models/userModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
 const auth = async (req, res, next) => {
-    const token = req.header('Authorization').replace('Bearer ', '');
+    const token = req.header('Authorization')?.replace('bearer','');
     if (!token) {
         return res.status(401).json({ msg: "No token, authorization denied" });
     }
@@ -20,6 +20,7 @@ const auth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
+        console.error('Token verification error:', error);
         res.status(401).json({ msg: "Token is not valid" });
     }
 };
