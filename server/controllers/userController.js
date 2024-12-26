@@ -36,12 +36,11 @@ export const UserLog = async (req, res) => {
         const isMatch = await bcrypt.compare(pass, userData.password); 
         if (!isMatch) { 
             return res.status(400).json({ msg: "Invalid Credentials" });
-        }
-        // res.status(200).json({ msg: "Logged in" }); 
+        } 
         const token = jwt.sign({ userId: userData._id },process.env.Key, { expiresIn: '1h' });
         userData.tokens = userData.tokens.concat({token});
         await userData.save();
-        res.redirect('/port');
+        res.status(200).json({token});
     } catch (error) { 
         console.error('Error during login:', error);
         res.status(500).json({ err: error});
