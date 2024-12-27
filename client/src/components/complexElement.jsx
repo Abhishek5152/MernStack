@@ -1,7 +1,7 @@
 const ComplexElement= ()=>(
     <div className="Container">
         <h1>Hello Brothers!!</h1>
-        <p>Join The Parade!!</p>
+        <h3>Join The Parade!!</h3>
         <img src="src\assets\react.svg" alt="image" />
     </div>
 )
