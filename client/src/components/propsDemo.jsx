@@ -1,10 +1,10 @@
-const greetElement = ({name})=>{
+const GreetElement = ({name})=>{
     <h1>Greetings {name}!!</h1>
 };
 export const PropsDemo = ()=>{
     return ( 
         <div>
-            <greetElement name = "ABC"/>
+            <GreetElement name = "ABC"/>
         </div>
     );
 };

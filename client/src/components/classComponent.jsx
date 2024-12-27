@@ -1,5 +1,5 @@
-import React,{Component} from "react";
-class ClasComponent extends Component{
+import {Component} from "react";
+class ClassComponent extends Component{
     return(){
         <div>
             <h1>This is a Class Component</h1>
