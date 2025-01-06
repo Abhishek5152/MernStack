@@ -58,6 +58,7 @@ const User = () => {
                                 <th scope="col">S.No.</th>
                                 <th scope="col">User Name</th>
                                 <th scope="col">User Email</th>
+                                <th scope="col">User Age</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -67,6 +68,7 @@ const User = () => {
                                     <th scope="row">{index + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.age}</td>
                                     <td>
                                         <button 
                                             className="btn btn-danger btn-sm mr-2" 
