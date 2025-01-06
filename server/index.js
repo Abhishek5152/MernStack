@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import routes from './routes/userRoutes.js';
-import auth from './middlewares/auth.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -25,16 +24,12 @@ mongoose.Promise = global.Promise;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "Views")));
 
 app.use('/api', routes);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "index.html"));
-});
-
-app.get('/port', auth, (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "port.html"));
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, "Views", "index.html"));
 });
 
 app.use((err, req, res, next) => {
@@ -43,5 +38,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on  http://localhost:${port}`);
+    console.log(`Server running on  http://localhost:${port}/home`);
 });

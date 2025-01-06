@@ -4,27 +4,33 @@ import jwt from 'jsonwebtoken';
 
 export const createUser = async (req, res) => { 
     try {
-        const{name, email, pass, age} = req.body;
-        const existingUser = await User.findOne({ email: req.body.email }); 
+        const { name, email, password, age } = req.body;
+        if (!name || !email || !password || !age) {
+            console.log("name:",name,"email:",email,"pass:",pass,"age:",age)
+            return res.status(400).json({ msg: "All fields are required" });
+        }
+
+        const existingUser = await User.findOne({ email });
         if (existingUser) { 
             return res.status(400).json({ msg: "User Already Exists!!" }); 
         }
-        const SeqPass = await bcrypt.hash(pass,10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const userData = new User({ 
-            name:name, 
-            email:email, 
-            password: SeqPass, 
-            age:age
+            name, 
+            email, 
+            password: hashedPassword, 
+            age 
         });
-        const token = jwt.sign({UserId:userData._id},process.env.Key,{expiresIn:'10'});
-        userData.tokens = userData.tokens.concat({token});
+        const token = jwt.sign({ UserId: userData._id }, process.env.Key, { expiresIn: '10h' });
+        userData.tokens = userData.tokens.concat({ token });
         await userData.save(); 
-        res.status(200).json({ msg: "All Is Well!!! 👍✌️👌" ,token}); 
+        res.status(200).json({ msg: "All Is Well!!! 👍✌️👌", token }); 
     } catch (error) { 
-            console.error(error); 
-            res.status(500).json({ error: "Internal Server Error" }); 
+        console.error("Error creating user:", error); 
+        res.status(500).json({ error: "Internal Server Error" }); 
     }
 };
+
 
 export const UserLog = async (req, res) => { 
     try { 
@@ -78,8 +84,8 @@ export const updateme = async (req, res) => {
 
 export const deleteme = async (req, res) => {
     try {
-        const { email } = req.body;
-        const userData = await User.findOneAndDelete({ email: email });
+        const { id } = req.params;
+        const userData = await User.findOneAndDelete({ _id : id });
         if (!userData) {
             return res.status(404).json({ msg: "Lol user is not here!!" });
         }

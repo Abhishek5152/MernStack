@@ -3,10 +3,10 @@ import { createUser, lolall, updateme, deleteme, UserLog} from '../controllers/u
 
 const router = express.Router();
 
-router.post("/lolall", lolall);
+router.get("/lolall", lolall);
 router.post("/createUser", createUser);
-router.post("/updateme", updateme);
-router.post("/deleteme", deleteme);
+router.put("/updateme", updateme);
+router.delete("/deleteme/:id", deleteme);
 router.post("/login", UserLog);
 
 export default router;

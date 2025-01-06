@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+}
+.card-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px;
+}
+.btn-custom {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+.btn-custom:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
