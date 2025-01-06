@@ -80,6 +80,11 @@ const User = () => {
                                     </td>
                                 </tr>
                             ))}
+                            {users.length===0 && (
+                                <tr>
+                                    <td colSpan="4">Nothing Found!!👎</td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
