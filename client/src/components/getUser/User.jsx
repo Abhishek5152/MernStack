@@ -71,7 +71,7 @@ const User = () => {
                                     <td>{user.age}</td>
                                     <td>
                                         <button 
-                                            className="btn btn-danger btn-sm mr-2" 
+                                            className="btn btn-danger btn-sm mr-2 mx-2" 
                                             name="Delete" 
                                             onClick={() => deleteUser(user._id)}>
                                             <i className="fa fa-trash"></i>

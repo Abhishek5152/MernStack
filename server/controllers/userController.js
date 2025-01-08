@@ -2,34 +2,35 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-export const createUser = async (req, res) => { 
+export const createUser = async (req, res) => {
     try {
         const { name, email, password, age } = req.body;
         if (!name || !email || !password || !age) {
-            console.log("name:",name,"email:",email,"pass:",pass,"age:",age)
+            console.log("name:", name, "email:", email, "pass:", pass, "age:", age);
             return res.status(400).json({ msg: "All fields are required" });
         }
 
         const existingUser = await User.findOne({ email });
-        if (existingUser) { 
-            return res.status(400).json({ msg: "User Already Exists!!" }); 
+        if (existingUser) {
+            return res.status(400).json({ msg: "User Already Exists!!" });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const userData = new User({ 
-            name, 
-            email, 
-            password: hashedPassword, 
-            age 
+        const userData = new User({
+            name,
+            email,
+            password: hashedPassword,
+            age
         });
         const token = jwt.sign({ UserId: userData._id }, process.env.Key, { expiresIn: '10h' });
         userData.tokens = userData.tokens.concat({ token });
-        await userData.save(); 
-        res.status(200).json({ msg: "All Is Well!!! 👍✌️👌", token }); 
-    } catch (error) { 
-        console.error("Error creating user:", error); 
-        res.status(500).json({ error: "Internal Server Error" }); 
+        await userData.save();
+        return res.redirect("http://localhost:5173/");
+    } catch (error) {
+        console.error("Error creating user:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 
 export const UserLog = async (req, res) => { 
