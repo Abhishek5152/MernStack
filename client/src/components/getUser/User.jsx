@@ -48,48 +48,50 @@ const User = () => {
 
     return (
         <div className="container mt-5">
-            <div className="card-container">
-                <h1 className="text-center mb-4">User List</h1>
-                <Link to="http://localhost:3000/home" className="btn btn-custom btn-block mb-3">Add User</Link>
-                <div className="table-responsive">
-                    <table className="table table-striped">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">S.No.</th>
-                                <th scope="col">User Name</th>
-                                <th scope="col">User Email</th>
-                                <th scope="col">User Age</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map((user, index) => (
-                                <tr key={user._id}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.age}</td>
-                                    <td>
-                                        <button 
-                                            className="btn btn-danger btn-sm mr-2 mx-2" 
-                                            name="Delete" 
-                                            onClick={() => deleteUser(user._id)}>
-                                            <i className="fa fa-trash"></i>
-                                        </button>
-                                        <button className="btn btn-warning btn-sm">
-                                            <i className="fa fa-pen"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                            {users.length===0 && (
+            <div className="card-container shadow-lg">
+                <h1 className="text-center mb-4 title">User List</h1>
+                <div className="block">
+                    <Link to="/Add" className="btn btn-custom btn-block mb-3 text-center">Add User</Link>
+                    <div className="table-responsive">
+                        <table className="table table-striped">
+                            <thead className="thead-dark">
                                 <tr>
-                                    <td colSpan="4">Nothing Found!!👎</td>
+                                    <th scope="col">S.No.</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">User Email</th>
+                                    <th scope="col">User Age</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {users.map((user, index) => (
+                                    <tr key={user._id}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.age}</td>
+                                        <td>
+                                            <button 
+                                                className="btn btn-danger btn-sm mr-2 mx-2" 
+                                                name="Delete" 
+                                                onClick={() => deleteUser(user._id)}>
+                                                <i className="fa fa-trash"></i>
+                                            </button>
+                                            <Link className="btn btn-primary btn-sm" to={`/Edit/${user._id}`}>
+                                                <i className="fa fa-pen"></i>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {users.length===0 && (
+                                    <tr>
+                                        <td colSpan="4">Nothing Found!!👎</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
             </div>
         </div>
     );

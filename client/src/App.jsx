@@ -93,9 +93,10 @@
 
 
 import User from "./components/getUser/User";
+import Adduser from "./components/getUser/Add";
+import Edit from "./components/getUser/Edit";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-// import "/App.css";
 
 function App() {
 
@@ -105,6 +106,8 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<User/>}/>,
+            <Route path="/Add" element={<Adduser/>}></Route>,
+            <Route path="/Edit/:id" element={<Edit/>}></Route>
           </Routes>
           <Toaster />
         </div>

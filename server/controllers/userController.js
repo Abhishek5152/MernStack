@@ -66,6 +66,38 @@ export const lolall = async (req, res) => {
     }
 };
 
+export const findUserById = async (req, res) => {
+    try {
+      const userid = req.params.id;
+  
+      const userData = await User.findById(userid);
+  
+      if (!userData) {
+        res.status(404).json({ message: "User not found." });
+      }
+      res.status(200).json(userData);
+    } catch (error) {
+      res.status(500).json({ err: error });
+    }
+};
+
+export const update = async (req, res) => {
+    try {
+      const userid = req.params.id;
+  
+      const userExist = await User.findByIdAndUpdate(userid, req.body, {
+        new: true,
+      });
+  
+      if (!userExist) {
+        res.status(404).json({ message: "User not found." });
+      }
+      res.status(200).json({ msg: "User has been updated succesfully" });
+    } catch (error) {
+      res.status(500).json({ err: error });
+    }
+};
+
 export const updateme = async (req, res) => {
     try {
         const { name, email } = req.body;

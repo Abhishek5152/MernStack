@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #cfcfcf;
     font-family: 'Arial', sans-serif;
     flex-direction: column;
 }
@@ -11,6 +11,9 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 20px;
+    border: 0;
+    border-radius: 20px;
+    background-color: #fff;
 }
 .btn-custom {
     background-color: #007bff;
@@ -20,4 +23,14 @@ body {
 .btn-custom:hover {
     background-color: #0056b3;
     border-color: #004085;
+}
+.title{
+    padding-top: 10px;
+}
+.table{
+    border: 1px;
+}
+.block{
+    padding: 20px;
+    padding-top: 0px;
 }
