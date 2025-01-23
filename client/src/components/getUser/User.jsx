@@ -38,7 +38,9 @@ const User = () => {
         try {
             console.log(userId);
             await axios.delete(`http://localhost:3000/api/deleteme/${userId}`);
-            toast.success("User deleted successfully!");
+            toast.success("User deleted successfully!",{
+                position:"top-right"
+            });
             setUsers(users.filter(user => user._id !== userId));
         } catch (error) {
             console.log(error);
@@ -85,7 +87,7 @@ const User = () => {
                                 ))}
                                 {users.length===0 && (
                                     <tr>
-                                        <td colSpan="4">Nothing Found!!👎</td>
+                                        <td colSpan="5">Nothing Found!!👎</td>
                                     </tr>
                                 )}
                             </tbody>
