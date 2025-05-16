@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import routes from './routes/userRoutes.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import requestLogger from './middlewares/logger.js';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ mongoose
 mongoose.Promise = global.Promise;
 
 app.use(cors());
+app.use(requestLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "Views")));
